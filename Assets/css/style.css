@@ -13,7 +13,7 @@ textarea {
 }
 
 /* check the title area */
-bigTitle {
+.bigTitle {
  text-align: center;
   background-color: transparent;
   color: black;
@@ -32,6 +32,8 @@ bigTitle {
 
 .row {
   border-top: 1px solid white;
+  /* height: 80px;
+  border-top: 1px solid white; */
 }
 
 .hour {

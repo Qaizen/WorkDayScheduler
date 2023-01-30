@@ -1,58 +1,55 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
 
-$(document).ready(function() { 
-  var currentDate = dayjs().format('MMMM D, YYYY'); 
-  $("#current-date").text(currentDate);
-  // Code that interacts with the DOM goes here 
-  var currentHour = dayjs().hour(); 
-  $(".time-block").each(function() { 
-    var timeBlockId = $(this).attr("id"); 
-    if(timeBlockId < currentHour) { 
-      $(this).removeClass("present future").addClass("past"); 
-    } else if(timeBlockId == currentHour) { 
-      $(this).removeClass("past future").addClass("present"); 
-    } else { 
-      $(this).removeClass("past present").addClass("future"); 
-    } 
-    $(".time-block").each(function() { 
-      var timeBlockId = $(this).attr("id"); 
-      var savedInput = localStorage.getItem(timeBlockId); 
-      $(this).find("textarea").val(savedInput); 
-    }); 
-  
-  }); 
+//header p id currentDay for current day and time
+$("#currentDay").text(moment().format("LLLL"));
 
-  
-  }); 
-
-
-$(function () {
-  // TODO: Add a listener for click events on the save button. This code should
-  // use the id in the containing time-block as a key to save the user input in
-  // local storage. HINT: What does `this` reference in the click listener
-  // function? How can DOM traversal be used to get the "hour-x" id of the
-  // time-block containing the button that was clicked? How might the id be
-  // useful when saving the description in local storage?
-  $("#save-button").click(function() { 
-    // Get the id of the containing time-block 
-    var timeBlockId = $(this).closest(".time-block").attr("id"); 
-    // Get the user input from the text field 
-    var userInput = $(this).closest(".time-block").find(".user-input").val(); 
-    // Save the user input in local storage using the time-block id as the key 
-    localStorage.setItem(timeBlockId, userInput); 
+$(document).ready(function () {
+  $(".saveBtn").click(function () {
+    // Get the id of the containing time-block
+    var timeBlockId = $(this).closest(".time-block").attr("id");
+    // Get the user input from the text field
+    var userInput = $(this).closest(".time-block").find(".description").val();
+    // Save the user input in local storage using the time-block id as the key
+    localStorage.setItem(timeBlockId, userInput);
   });
-  //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
+
+  function trackTime() {
+    // get current number for the hour and be able to console log
+    var currentTime = moment().hour(); //set to current hour w moment.js
+    console.log(currentTime); //log var currentTime to console
+
+    //loop time blocks, select all time-block element using jquery.each
+    $(".time-block").each(function () {
+      var blockHour = parseInt($(this).attr("id").split("hour-")[1]);
+      console.log(blockHour, currentTime);
+
+      //check the time w conditional statements
+      if (blockHour < currentTime) {
+        $(this).addClass("past");
+        $(this).removeClass("present");
+        $(this).removeClass("future");
+      } else if (blockHour === currentTime) {
+        $(this).removeClass("past");
+        $(this).addClass("present");
+        $(this).removeClass("future");
+      } else {
+        $(this).removeClass("past");
+        $(this).removeClass("present");
+        $(this).addClass("future");
+      }
+    });
+  }
+
+  trackTime();
 });
+
+//get value from localStorage and display after refresh and ready
+$("#hour-9 .description").val(localStorage.getItem("hour-9"));
+$("#hour-10 .description").val(localStorage.getItem("hour-10"));
+$("#hour-11 .description").val(localStorage.getItem("hour-11"));
+$("#hour-12 .description").val(localStorage.getItem("hour-12"));
+$("#hour-13 .description").val(localStorage.getItem("hour-13"));
+$("#hour-14 .description").val(localStorage.getItem("hour-14"));
+$("#hour-15 .description").val(localStorage.getItem("hour-15"));
+$("#hour-16 .description").val(localStorage.getItem("hour-16"));
+$("#hour-17 .description").val(localStorage.getItem("hour-17"));
+
