@@ -1,4 +1,3 @@
-
 //header p id currentDay for current day and time
 $("#currentDay").text(moment().format("LLLL"));
 
