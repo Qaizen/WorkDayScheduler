@@ -6,7 +6,7 @@ $(document).ready(function () {
   $(".saveBtn").click(function () {
     // Get the id of the containing time-block
     var timeBlockId = $(this).closest(".time-block").attr("id");
-    // Get the user input from the text field
+    // Get the user input from the description class text field
     var userInput = $(this).closest(".time-block").find(".description").val();
     // Save the user input in local storage using the time-block id as the key
     localStorage.setItem(timeBlockId, userInput);
@@ -15,7 +15,7 @@ $(document).ready(function () {
   function trackTime() {
     // get current number for the hour and be able to console log
     var currentTime = moment().hour(); //set to current hour w moment.js
-    console.log(currentTime); //log var currentTime to console
+    console.log(currentTime); 
 
     //loop time blocks, select all time-block element using jquery.each
     $(".time-block").each(function () {
