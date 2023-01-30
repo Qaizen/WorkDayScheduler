@@ -43,4 +43,4 @@ Simple calendar application that allows a user to save events for each hour of t
 
 ## PW generator web app screenshot
 
-![Screenshot](/Assets/images/WorkDay1.jpeg)
+![Screenshot](/assets/images/WorkDay1.jpeg)
